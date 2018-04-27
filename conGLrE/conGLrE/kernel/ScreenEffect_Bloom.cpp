@@ -79,7 +79,7 @@ void ScreenEffect_Bloom::Process(ScreenFBO* _screenFBO)
 
 	//先要进行一次处理，得到图像的高亮部分并保存在pingpongFBO1中
 	m_shader_highlight->Enable();
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, pingpongFBO[0]);
+	glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[0]);
 	m_shader_highlight->SetTextureUnit(0);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_scaleMap);

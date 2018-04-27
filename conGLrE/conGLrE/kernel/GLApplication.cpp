@@ -321,3 +321,93 @@ GLuint scaleMap;
 		//这个函数主要是渲染前期的一些参数调节，比如是否有cull，depth开不开启，以及激活循环回调函数
 		GLUTSetupRun(this);
 	}
+
+	//void DSGeometryPass()
+	//{
+	//	m_DSGeomPassTech.Enable();
+	//	m_gbuffer.BindForDrawing();
+	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//	Pipeline p;
+	//	p.Scale(0.1f, 0.1f, 0.1f);
+	//	p.Rotate(0.0f, 0.0f, 0.0f);
+	//	p.WorldPos(0.0f, 0.0f, 0.0f);
+	//	p.SetCamera(camera.getInfo);
+	//	p.SetPerspectivePorj(persProj);
+
+	//	m_DSGeomPassTech.SetWVP(p.GetWVPTrans());
+	//	m_DSGeomPassTech.SetWorldMatrix(p.GetWorldTrans());
+	//	//按道理来说，这次render结束以后，GBUFFER里面的所有纹理都应该已经被填充了内容了
+	//	m_mesh.Render();
+	//}
+
+	//void DSLightPass()
+	//{
+	//	//接下来的pass实际上就开始要读取gbuffer里面的内容，并分别将内容贴到  屏幕缓存的四部分。
+	//	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//	m_gbuffer.BindForReading();
+	//	GLsizei halfWidth = (GLsizei)(window_width / 2.0f);
+	//	GLsizei halfHeight = (GLsizei)(window_height) / 2.0f);
+	//	m_gbuffer.SetReadBuffer(GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
+	//	glBlitFramebuffer(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, halfWidth, halfHeight,GL_COLOR_BUFFER_BIT,GL_LINEAR);
+	//	m_gbuffer.SetReadBuffer(GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
+	//	glBlitFramebuffer(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, halfWidth, halfHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+	//	m_gbuffer.SetReadBuffer(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
+	//	glBlitFramebuffer(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, halfwidth, halfheight, WINDOW_WIDTH, WINDOW_HEIGHT, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+	//	m_gbuffer.SetReadBuffer(GBuffer::GBUFFER_TEXTURE_TYPE_TEXCOORD);
+	//	glBlitFramebuffer(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, halfwidth, halfheight, WINDOW_WIDTH, WINDOW_HEIGHT, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+	//	//然后关键还是看shader里面是怎么写的
+
+	//
+	//}
+
+	//{
+	//	(geometry_pass.vs)
+	//		#version 330
+	//		layout(location = 0) in vec3 Position;
+	//	layout(location = 1)in vec2 Texcoord;
+	//	layout(location = 2)in vec3 Normal;
+
+	//	uniform mat4 gWVP;
+	//	uniform mat4 gWorld;
+	//	out vec2 Texcoord0;
+	//	out vec3 normal0;
+	//	out vec3 WorldPos0;
+
+	//	void main()
+	//	{
+	//		gl_Position = gWVP * vec4(Position, 1.0);
+	//		TexCoord0 = Texcoord;
+	//		Normal0 = (gWorld * vec4(Normal, 0.0)).xyz;
+	//		worldPos0 = (gWrold * vec4(Position, 1.0)).xyz;
+	//	}
+	//}
+
+	//{
+	//	(geometry_pass.fs)
+	//		#version 330
+	//		in vec2 Texcoord0;
+	//	in vec3 Normal0;
+	//	in vec3 WorldPos0;
+	//	layout(location = 0)out vec3 WorldPosOut;
+	//	layout(location = 1)out vec3 DiffuseOut;
+	//	layout(location = 2)out vec3 NormalOut;
+	//	layout(location = 3)out vec3 TexcoordOut;
+
+	//	uniform sampler2D gColorMap;
+	//	void Main()
+	//	{
+	//		WorldPosOut = WorldPos0;
+	//		DiffuseOut = texture(gColorMap, TexCoord0).xyz;
+	//		normalOut = normalize(Normal0);
+	//		TexCoordOut = vec3(Texcoord0, 0);
+
+	//	}
+
+	//}
+
+
+
+
+
+

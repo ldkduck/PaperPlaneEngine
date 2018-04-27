@@ -18,7 +18,7 @@ bool Material_DK::Init(Texture* diffuseTex, Texture* normalTex,Vector2f scale)
 
 void Material_DK::ShadowPreUpdate(Transform trans, Camera* cam, LightSystem* light)
 {
-	//将阴影纹理绑定到纹理单元上
+	//将阴影纹理绑定到渲染目标上
 	light->m_shadowMapFBO->BindForWriting();
 	m_shadowShader->UpdateRenderInfo(trans, cam, light);
 	

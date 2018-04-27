@@ -5,9 +5,9 @@
 #include <unistd.h>
 #endif
 #include <stdio.h>
-#include <GL/glew.h>
+#include "GL/glew.h"
 #include "GL/freeglut.h"
-#include <GL/glut.h>
+#include "GL/glut.h"
 #include "ogldev_util.h"
 
 
@@ -166,7 +166,6 @@ static void MouseCB(int Button, int State, int x, int y)
 void InitCallbacks()
 {
 	glutDisplayFunc(RenderSceneCB);
-
 	glutIdleFunc(IdleCB);
 	glutSpecialFunc(SpecialKeyboardCB);
 	glutSpecialUpFunc(SpecialKeyboardUpCB);
@@ -176,55 +175,7 @@ void InitCallbacks()
 	glutMouseFunc(MouseCB);
 }
 
-void GLUTSetupInit(int argc, char** argv, bool WithDepth, bool WithStencil)
-{
-	sWithDepth = WithDepth;
-	sWithStencil = WithStencil;
 
-	glutInit(&argc, argv);
-
-	uint DisplayMode = GLUT_DOUBLE | GLUT_RGBA;
-
-	if (WithDepth) {
-		DisplayMode |= GLUT_DEPTH;
-	}
-
-	if (WithStencil) {
-		DisplayMode |= GLUT_STENCIL;
-	}
-
-	glutInitDisplayMode(DisplayMode);
-
-	//glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-}
-
-bool GLUTSetupCreateWindow(unsigned int Width, unsigned int Height, bool isFullScreen, const char* pTitle)
-{
-	glutInitWindowSize(800, 600);
-	glutInitWindowPosition(600, 100);
-	glutCreateWindow(pTitle);
-	/*if (isFullScreen) {
-		char ModeString[64] = { 0 };
-		int bpp = 32;
-		SNPRINTF(ModeString, sizeof(ModeString), "%dx%d:%d@60", Width, Height, bpp);
-		glutGameModeString(ModeString);
-		glutEnterGameMode();
-	}
-	else {
-		
-		glutInitWindowSize(Width, Height);
-		glutCreateWindow(pTitle);
-	}*/
-
-	// Must be done after glut is initialized!
-	GLenum res = glewInit();
-	if (res != GLEW_OK) {
-		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
-		return false;
-	}
-	
-	return true;
-}
 
 void GLUTSetupRun(ICallbacks* pCallbacks)
 {
